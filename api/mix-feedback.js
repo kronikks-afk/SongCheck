@@ -48,7 +48,31 @@ module.exports = async (req, res) => {
         },
         body: JSON.stringify({
           contents: [{ parts: [{ text: prompt }] }],
-          generationConfig: { maxOutputTokens: 1024 },
+          generationConfig: {
+            maxOutputTokens: 1024,
+            responseMimeType: 'application/json',
+            responseSchema: {
+              type: 'OBJECT',
+              properties: {
+                score: { type: 'INTEGER' },
+                summary: { type: 'STRING' },
+                strengths: { type: 'ARRAY', items: { type: 'STRING' } },
+                issues: {
+                  type: 'ARRAY',
+                  items: {
+                    type: 'OBJECT',
+                    properties: {
+                      metric: { type: 'STRING' },
+                      observation: { type: 'STRING' },
+                      suggestion: { type: 'STRING' },
+                    },
+                    required: ['metric', 'observation', 'suggestion'],
+                  },
+                },
+              },
+              required: ['score', 'summary', 'strengths', 'issues'],
+            },
+          },
         }),
       }
     );
