@@ -67,13 +67,13 @@ This serves `index.html` and the `/api` functions together on
 
 ## Notes
 
-- The model used server-side is `gemini-2.5-flash-lite`, a
-  well-established model on Google's permanent free tier. If you want
-  higher-quality responses and don't mind a smaller/less predictable
-  free quota, you can try `gemini-2.5-flash` or a current `gemini-3.x`
-  model instead — brand-new model releases sometimes have very tight or
-  unstable free-tier quotas in their first weeks. Check
-  https://ai.google.dev/gemini-api/docs/models for the current lineup.
+- The model used server-side is `gemini-3.5-flash-lite`, currently on
+  Google's free tier. Google has been retiring older model IDs quickly
+  in 2026 (`gemini-2.5-flash-lite` was pulled from new users mid-year),
+  so if you get a 404 "no longer available" error in the future, check
+  https://ai.google.dev/gemini-api/docs/models for the current name and
+  swap the model string in `api/mix-feedback.js`, `api/next-lines.js`,
+  and `api/lyrics.js`.
 - The BPM estimate is a lightweight autocorrelation-based guess, not a
   professional beat detector — it's fine for a rough read, not for
   syncing to a DAW.
